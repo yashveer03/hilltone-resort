@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -197,41 +198,57 @@ export default function Page() {
         <MessageCircle size={30} />
       </a>
 
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-black/25 px-6 py-5 backdrop-blur-xl md:px-14">
-        <a href="#" className="text-sm font-black tracking-[0.35em] text-white">
-          HILLTONE
-        </a>
+      <header className="fixed top-0 z-50 w-full px-4 py-4 md:px-8">
+  <div className="glass luxury-shadow mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-4">
 
-        <div className="hidden items-center gap-9 text-sm font-medium text-white/80 md:flex">
-          <a href="#about" className="hover:text-[#D7B46A]">About</a>
-          <a href="#rooms" className="hover:text-[#D7B46A]">Rooms</a>
-          <a href="#gallery" className="hover:text-[#D7B46A]">Gallery</a>
-          <a href="#booking" className="hover:text-[#D7B46A]">Booking</a>
-        </div>
+    <div>
+      <h1 className="text-2xl font-black tracking-[0.3em] text-gold">
+        HILLTONE
+      </h1>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setDark(!dark)}
-            className="rounded-full bg-white/10 p-3 text-white"
-          >
-            {dark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+      <p className="text-[10px] uppercase tracking-[0.5em] text-white/50">
+        Luxury Resort
+      </p>
+    </div>
 
-          <a
-            href="#booking"
-            className="hidden rounded-full bg-[#D7B46A] px-6 py-3 text-xs font-black uppercase tracking-widest text-[#111827] transition hover:scale-105 hover:bg-white md:inline-flex"
-          >
-            Book Now
-          </a>
+    <nav className="hidden items-center gap-8 md:flex">
+      <a
+        href="#rooms"
+        className="text-sm font-semibold text-white/80 transition duration-300 hover:text-gold"
+      >
+        Rooms
+      </a>
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-full bg-white/10 p-3 text-white md:hidden"
-          >
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </nav>
+      <a
+        href="#gallery"
+        className="text-sm font-semibold text-white/80 transition duration-300 hover:text-gold"
+      >
+        Gallery
+      </a>
+
+      <a
+        href="#experience"
+        className="text-sm font-semibold text-white/80 transition duration-300 hover:text-gold"
+      >
+        Experience
+      </a>
+
+      <a
+        href="#contact"
+        className="text-sm font-semibold text-white/80 transition duration-300 hover:text-gold"
+      >
+        Contact
+      </a>
+    </nav>
+
+    <a
+      href="#booking"
+      className="gold-gradient rounded-full px-6 py-3 text-sm font-black uppercase tracking-[0.2em] text-[#050816] transition duration-300 hover:scale-105"
+    >
+      Book Now
+    </a>
+  </div>
+</header>
 
       <AnimatePresence>
         {menuOpen && (
