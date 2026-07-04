@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -46,32 +45,41 @@ const images = {
 
 const heroSlides = [images.hero1, images.hero2, images.hero3];
 
-const rooms = [
+const rooms =[
   {
-    name: "Family Suite",
-    price: "₹8,499",
-    image: images.room3,
-    desc: "Spacious family-friendly suite with comfort and premium mountain views.",
-  },
-  {
-    name: "Deluxe Room",
+    title: "Deluxe Room",
+
+    image: "/images/rooms/deluxe-room/1.jpg",
+
     price: "₹4,999",
-    image: images.room1,
-    desc: "Elegant room with cozy interiors and peaceful ambience.",
+
+    description:
+      "Elegant mountain-facing deluxe room with premium comfort and beautiful interiors.",
   },
+
   {
-    name: "Super Deluxe Room",
-    price: "₹6,499",
-    image: images.room2,
-    desc: "Premium room with refined interiors and extra comfort.",
-  },
-  {
-    name: "Luxury Room",
+    title: "Family Suite",
+
+    image: "/images/rooms/family-suite/1.jpg",
+
     price: "₹7,999",
-    image: images.lobby,
-    desc: "Luxury stay designed for guests who want style and comfort.",
+
+    description:
+      "Spacious family suite designed for comfort with luxury furnishings and scenic views.",
   },
-];
+
+  {
+    title: "Luxury Suite",
+
+    image: "/images/rooms/luxury-room/1.jpg",
+
+    price: "₹11,999",
+
+    description:
+      "Ultra-premium luxury suite offering panoramic mountain scenery and unmatched comfort.",
+  },
+] 
+;
 
 const features = [
   { icon: Mountain, title: "Mountain View", text: "Peaceful Himalayan surroundings." },
@@ -428,43 +436,55 @@ export default function Page() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {rooms.map((room, i) => (
-              <motion.div
-                key={room.name}
-                initial={{ opacity: 0, y: 80 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.8, delay: i * 0.08 }}
-                onClick={() => setSelectedRoom(room)}
-                className="group cursor-pointer overflow-hidden rounded-[2rem] bg-white text-[#111827] shadow-2xl"
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={room.image}
-                    alt={room.name}
-                    className="h-96 w-full object-cover transition duration-700 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-8">
-                  <div className="mb-3 flex gap-1 text-[#D7B46A]">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={16} fill="currentColor" />
-                    ))}
-                  </div>
-                  <h3 className="font-serif text-3xl">{room.name}</h3>
-                  <p className="mt-3 text-sm leading-7 text-gray-600">{room.desc}</p>
-                  <div className="mt-7 flex items-center justify-between">
-                    <p className="text-xl font-black">
-                      {room.price}
-                      <span className="text-sm font-normal text-gray-500"> / night</span>
-                    </p>
-                    <button className="rounded-full bg-[#D7B46A] p-4 text-[#111827]">
-                      <ArrowRight size={18} />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          {rooms.map((room, i) => (
+  <motion.div
+    key={room.title}
+    initial={{ opacity: 0, y: 80 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: false }}
+    transition={{ duration: 0.8, delay: i * 0.08 }}
+    onClick={() => setSelectedRoom(room)}
+    className="group cursor-pointer overflow-hidden rounded-[2rem] bg-white text-[#111827] shadow-2xl"
+  >
+    <div className="overflow-hidden">
+      <img
+        src={room.image}
+        alt={room.title}
+        className="h-96 w-full object-cover transition duration-700 group-hover:scale-110"
+      />
+    </div>
+
+    <div className="p-8">
+      <div className="mb-3 flex gap-1 text-[#D7B46A]">
+        {[1, 2, 3, 4, 5].map((s) => (
+          <Star key={s} size={16} fill="currentColor" />
+        ))}
+      </div>
+
+      <h3 className="font-serif text-3xl">
+        {room.title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-7 text-gray-600">
+        {room.description}
+      </p>
+
+      <div className="mt-7 flex items-center justify-between">
+        <p className="text-xl font-black">
+          {room.price}
+          <span className="text-sm font-normal text-gray-500">
+            {" "}
+            / night
+          </span>
+        </p>
+
+        <button className="rounded-full bg-[#D7B46A] p-4 text-[#111827]">
+          <ArrowRight size={18} />
+        </button>
+      </div>
+    </div>
+  </motion.div>
+))}
           </div>
         </div>
       </section>
@@ -583,7 +603,9 @@ export default function Page() {
 
                 <select value={booking.room} onChange={(e) => setBooking({ ...booking, room: e.target.value })} className="rounded-2xl bg-white px-5 py-4 text-[#111827]">
                   {rooms.map((room) => (
-                    <option key={room.name} value={room.name}>{room.name}</option>
+                    <option key={room.title} value={room.title}>
+                    {room.title}
+                  </option>
                   ))}
                 </select>
               </div>
@@ -702,22 +724,45 @@ export default function Page() {
               onClick={(e) => e.stopPropagation()}
               className="max-w-4xl overflow-hidden rounded-[2rem] bg-white text-[#111827] shadow-2xl"
             >
-              <img src={selectedRoom.image} alt={selectedRoom.name} className="h-[420px] w-full object-cover" />
-              <div className="p-8">
-                <h3 className="font-serif text-4xl">{selectedRoom.name}</h3>
-                <p className="mt-4 text-gray-600">{selectedRoom.desc}</p>
-                <p className="mt-5 text-2xl font-black">{selectedRoom.price} / night</p>
-                <button
-                  onClick={() => {
-                    setBooking({ ...booking, room: selectedRoom.name });
-                    setSelectedRoom(null);
-                    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="mt-7 rounded-full bg-[#D7B46A] px-7 py-4 font-black uppercase tracking-widest"
-                >
-                  Book This Room
-                </button>
-              </div>
+             <img
+  src={selectedRoom.image}
+  alt={selectedRoom.title}
+  className="h-[420px] w-full object-cover"
+/>
+
+<div className="p-8">
+  <h3 className="font-serif text-4xl">
+    {selectedRoom.title}
+  </h3>
+
+  <p className="mt-4 text-gray-600">
+    {selectedRoom.description}
+  </p>
+
+  <p className="mt-5 text-2xl font-black">
+    {selectedRoom.price} / night
+  </p>
+
+  <button
+    onClick={() => {
+      setBooking({
+        ...booking,
+        room: selectedRoom.title,
+      });
+
+      setSelectedRoom(null);
+
+      document
+        .getElementById("booking")
+        ?.scrollIntoView({
+          behavior: "smooth",
+        });
+    }}
+    className="mt-7 rounded-full bg-[#D7B46A] px-7 py-4 font-black uppercase tracking-widest"
+  >
+    Book This Room
+  </button>
+</div>
             </motion.div>
           </motion.div>
         )}
